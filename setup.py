@@ -32,7 +32,7 @@ setup(
     license='MIT',
     author='migelbd',
     author_email='migel.bd@gmail.com',
-    packages=['redmine'],
+    packages=['app'],
     include_package_data=True,
     classifiers=[
         'Development Status :: 3 - Alpha',
