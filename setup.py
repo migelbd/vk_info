@@ -45,7 +45,7 @@ setup(
     tests_require=[],
     entry_points={
         'console_scripts': [
-            'vkifno = app.core:cli',
+            'vk_info = app.core:cli',
         ]
     }
 )
