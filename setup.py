@@ -17,7 +17,7 @@ requirements = [
     'rich==10.9.0',
     'six==1.16.0',
     'urllib3==1.26.6',
-    'vk-api==11.9.4',
+    'vk-api==11.9.5',
     'wcwidth==0.2.5',
 ]
 
