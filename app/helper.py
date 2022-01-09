@@ -1,4 +1,9 @@
+import functools
+
+import click
 from rich.table import Table
+
+from app.vk import VkError
 
 
 def get_table_users(rows: list) -> Table:
@@ -26,6 +31,7 @@ def get_table_users(rows: list) -> Table:
 
     return tb
 
+
 def get_table_users_topic(rows: list) -> Table:
     tb = Table()
     tb.add_column('ID')
@@ -52,3 +58,14 @@ def get_table_users_topic(rows: list) -> Table:
         tb.add_row(*gen_row(u))
 
     return tb
+
+
+def handle_error(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except VkError as e:
+            click.echo(e)
+
+    return wrapper

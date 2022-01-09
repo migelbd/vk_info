@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from typing import Optional
 
 import questionary
@@ -17,7 +18,7 @@ def auth_handler():
     return key, remember_device
 
 
-class VkAPIError(Exception):
+class VkError(Exception):
     pass
 
 
@@ -47,11 +48,12 @@ class VkAPI:
     def api(self) -> Optional[VkApiMethod]:
         if self._api:
             return self._api
-        raise VkAPIError('API не задано')
+        raise VkError('API не задано')
 
     def get_is_member(self, group_id: str, *user_ids):
         res = self.api.groups.isMember(group_id=group_id, user_ids=user_ids)
-
+        if not isinstance(res, Iterable):
+            raise VkError('В топике нет сообщений')
         return {it.get('user_id'): bool(it.get('member')) for it in res}
 
     def get_topic_members(self, group_id: str, topic_id: str):

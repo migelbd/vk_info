@@ -8,7 +8,7 @@ from click import Context
 from rich.console import Console
 from rich.table import Table
 
-from app.helper import get_table_users, get_table_users_topic
+from app.helper import get_table_users, get_table_users_topic, handle_error
 from app.vk import VkAPI
 
 console = Console()
@@ -65,6 +65,7 @@ def user(ctx, user_id):
 @click.argument('topic_url')
 @click.option('-n', '--not-in-group', is_flag=True)
 @click.pass_context
+@handle_error
 def topic(ctx, topic_url, not_in_group):
     api: VkAPI = ctx.obj['api']
     if not api:
